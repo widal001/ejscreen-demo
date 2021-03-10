@@ -52,7 +52,8 @@ If you don't have Python version 3.6 or later installed on your computer, consid
 
 ### Installation
 
-1. Clone your the repo on your local machine`git clone https://github.com/department-of-general-services/workday-payroll-issues.git`
+1. Fork the repo following [these instructions](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
+1. Clone the forked repo on your local machine`git clone https://github.com/YOUR_USERNAME/ejscreen-demo.git`
 1. Create a new virtual environment in your project directory `python -m venv env`
 1. Activate your virtual environment `source env/bin/activate`
 1. Install necessary python packages`pip install -r requirements.txt`
