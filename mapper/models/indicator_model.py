@@ -1,6 +1,6 @@
 from marshmallow import Schema, EXCLUDE, fields
 
-from mapper.app import db
+from mapper.models.base_model import db
 
 
 class Indicator(db.Model):
@@ -18,7 +18,7 @@ class Indicator(db.Model):
     description = db.Column(db.String)
 
 
-class IndicatorsSchema(Schema):
+class IndicatorSchema(Schema):
     id = fields.Integer(dump_only=True)
     category = fields.String()
     source = fields.String()

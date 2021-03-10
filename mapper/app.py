@@ -1,10 +1,7 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 
 from mapper import api
 from mapper.config import Config
-
-db = SQLAlchemy()
 
 
 def create_app(test_config=None):
@@ -24,6 +21,8 @@ def create_app(test_config=None):
         return "Hello, World."
 
     # initialize the database
+    from mapper.models.base_model import db
+
     db.init_app(app)
 
     return app, db
