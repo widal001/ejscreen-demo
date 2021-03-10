@@ -15,6 +15,11 @@ def create_app():
     # register the api blueprint
     app.register_blueprint(api.bp)
 
+    # create a test route
+    @app.route("/")
+    def home_page():
+        return "Hello, World."
+
     # initialize the database
     db.init_app(app)
 
