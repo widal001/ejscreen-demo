@@ -1,0 +1,19 @@
+id,category,source,source_name,description
+1,demographic,EJScreen,ACSTOTPOP,Total population
+2,demographic,EJScreen,MINORPCT,% people of color
+3,demographic,EJScreen,LOWINCPCT,% low-income
+4,demographic,EJScreen,LESSHSPCT,% less than high school
+5,demographic,EJScreen,LINGISOPCT,% of households (interpreted as individuals) in linguistic isolation
+6,demographic,EJScreen,UNDER5PCT,% under age 5
+7,demographic,EJScreen,OVER64PCT,% over age 64
+8,environmental,EJScreen,PRE1960PCT,% pre-1960 housing (lead paint indicator)
+9,environmental,EJScreen,DSLPM,Diesel particulate matter level in air
+10,environmental,EJScreen,CANCER,Air toxics cancer risk
+11,environmental,EJScreen,RESP,Air toxics respiratory hazard index
+12,environmental,EJScreen,PTRAF,Traffic proximity and volume
+13,environmental,EJScreen,PWDIS,Indicator for major direct dischargers to water
+14,environmental,EJScreen,PNPL,Proximity to National Priorities List (NPL) sites
+15,environmental,EJScreen,PRMP,Proximity to Risk Management Plan (RMP) facilities
+16,environmental,EJScreen,PTSDF,Proximity to Treatment Storage and Disposal (TSDF) facilities
+17,environmental,EJScreen,OZONE,Ozone level in air
+18,environmental,EJScreen,PM25,PM2.5 level in air

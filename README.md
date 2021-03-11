@@ -1,4 +1,5 @@
 # EJScreen Demo
+
 Updated example of EJScreen's tool
 
 ## Table of Contents
@@ -18,7 +19,7 @@ This tool provides a demonstration of an updated version of the EJScreen mapping
 
 Below is a brief description of the current EJScreen tool pulled from its [home page](https://www.epa.gov/ejscreen):
 
->In order to better meet the Agency’s responsibilities related to the protection of public health and the environment, EPA has developed a new environmental justice (EJ) mapping and screening tool called EJSCREEN. It is based on nationally consistent data and an approach that combines environmental and demographic indicators in maps and reports.
+> In order to better meet the Agency’s responsibilities related to the protection of public health and the environment, EPA has developed a new environmental justice (EJ) mapping and screening tool called EJSCREEN. It is based on nationally consistent data and an approach that combines environmental and demographic indicators in maps and reports.
 
 To use the EPA's current version of the EJScreen tool and learn more about the underlying dataset, please refer to the links in the Additional Resources section below.
 
@@ -26,6 +27,7 @@ To use the EPA's current version of the EJScreen tool and learn more about the u
 
 - [EJScreen Mapping Tool](https://ejscreen.epa.gov/mapper/)
 - [Explanation of EJScreen Indicators](https://www.epa.gov/ejscreen/understanding-ejscreen-results)
+- [Project Data Dictionary](docs/data-dictionary.md)
 
 ### Made With
 
@@ -67,6 +69,7 @@ If you don't have Python version 3.6 or later installed on your computer, consid
    $ pytest
    > =============== XX passed in XXs ===============
    ```
+
 ## Usage
 
 1. After you've cloned and installed the repo, start your local test server `python run.py`
