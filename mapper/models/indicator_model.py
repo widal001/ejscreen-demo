@@ -1,14 +1,16 @@
 from marshmallow import Schema, EXCLUDE, fields
 
-from mapper.models.base_model import db
+# from sqlalchemy.ext.hybrid import hybrid_property
+
+from mapper.models import db
 
 
 class Indicator(db.Model):
-    """Database table that stores the unique list of indicators and metadata
-    about those indicators like their source, description, and category
+    """Stores the unique list of indicators and metadata about those
+    indicators like their source, description, and category
     """
 
-    __tablename__ = "indicators"
+    __tablename__ = "indicator"
 
     # table columns
     id = db.Column(db.Integer, primary_key=True)
@@ -16,6 +18,13 @@ class Indicator(db.Model):
     source = db.Column(db.String)
     source_name = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
+
+    # relationships
+    scores = db.relationship(
+        "IndicatorScore",
+        back_populates="indicator",
+        cascade="all, delete, delete-orphan",
+    )
 
 
 class IndicatorSchema(Schema):
