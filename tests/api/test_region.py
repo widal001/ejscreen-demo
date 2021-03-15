@@ -21,7 +21,7 @@ class TestRegionModel:
 
         # validation
         assert region is not None
-        assert region.census_level == "census_block"
+        assert region.census_level == "block_group"
         for k, v in data.items():
             assert getattr(region, k) == v
 

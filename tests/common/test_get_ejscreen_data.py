@@ -1,23 +1,24 @@
 import json
 from pathlib import Path
 
-from mapper.common.get_ejscreen_data import EJScreen
+from mapper.common.get_ejscreen_data import transform_and_load
+from mapper.models import Region, Indicator, IndicatorScore
 
 
-class TestInit:
-    def test_success(self):
-        # setup
-        dir = Path.cwd() / "tests" / "data"
-        src_file = dir / "source_geo.json"
-        exp_file = dir / "filtered_geo.json"
-        with open(exp_file) as f:
-            expected = json.load(f)
+def test_transform_and_load(client):
 
-        # execution
-        etl = EJScreen(src_file)
+    # setup
+    file = Path.cwd() / "tests" / "data" / "source_geo.json"
+    with open(file) as f:
+        geo = json.load(f)
+    feature = geo["features"][0]
 
-        # validation
-        assert etl.json == expected
+    # execute
+    transform_and_load(feature)
+    region = Region.query.get(1)
+    scores = region.indicator_scores
 
-    def test_missing_file(self):
-        assert 1
+    # validate
+    assert region is not None
+    assert len(scores) == 18
+    assert 0
