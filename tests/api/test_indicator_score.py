@@ -1,3 +1,6 @@
+import pytest
+from sqlalchemy.exc import IntegrityError
+
 from mapper.models import db, IndicatorScore, Region
 
 
@@ -29,3 +32,31 @@ class TestIndicatorScoreModel:
             print(f"expected: {v}")
             print(f"actual: {actual}")
             assert actual == v
+
+    def test_add_duplicate(self, client):
+        # setup
+        region_data = {"id": 1, "fips_code": "0000001", "state": "MD"}
+        score_data = {
+            "indicator_id": 1,
+            "year": 2020,
+            "value": 10,
+        }
+
+        # execution
+        region = Region(**region_data)
+        score = IndicatorScore(**score_data)
+        score.region = region
+
+        db.session.add(region)
+        db.session.add(score)
+        db.session.commit()
+
+        # validation
+        with pytest.raises(IntegrityError):
+            score_data["value"] = 11
+            score2 = IndicatorScore(**score_data)
+            score2.region = region
+
+            db.session.add(region)
+            db.session.add(score2)
+            db.session.commit()

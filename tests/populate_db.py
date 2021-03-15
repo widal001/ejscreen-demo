@@ -1,6 +1,6 @@
-from mapper.models.indicator_model import Indicator
+from mapper.models import Indicator
 
-from tests.data.indicators_data import INDICATORS
+from mapper.common.ejscreen_columns import INDICATORS
 
 indicators = {name: Indicator(**fields) for name, fields in INDICATORS.items()}
 

@@ -1,4 +1,4 @@
-from tests.data.indicators_data import INDICATORS
+from mapper.common.ejscreen_columns import INDICATORS
 
 
 class TestIndicatorsResource:
