@@ -7,8 +7,9 @@ from mapper.models import db, IndicatorScore, Region
 class TestIndicatorScoreModel:
     def test_add_indicator_score(self, client):
         # setup
-        region_data = {"id": 1, "fips_code": "0000001", "state": "MD"}
+        region_data = {"id": 999, "fips_code": "0000001", "state": "MD"}
         score_data = {
+            "id": 999,
             "indicator_id": 1,
             "year": 2020,
             "value": 10,
@@ -24,7 +25,7 @@ class TestIndicatorScoreModel:
         db.session.commit()
 
         # validation
-        score = IndicatorScore.query.get(1)
+        score = IndicatorScore.query.get(999)
         assert score.region.fips_code == "0000001"
         for k, v in score_data.items():
             actual = getattr(score, k)
@@ -35,7 +36,7 @@ class TestIndicatorScoreModel:
 
     def test_add_duplicate(self, client):
         # setup
-        region_data = {"id": 1, "fips_code": "0000001", "state": "MD"}
+        region_data = {"id": 999, "fips_code": "0000001", "state": "MD"}
         score_data = {
             "indicator_id": 1,
             "year": 2020,

@@ -1,4 +1,4 @@
-from mapper.common.ejscreen_columns import INDICATORS
+from mapper.common.ejscreen_indicators import INDICATORS
 
 
 class TestIndicatorsResource:

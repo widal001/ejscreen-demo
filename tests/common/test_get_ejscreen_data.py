@@ -1,24 +1,20 @@
-import json
-from pathlib import Path
-
-from mapper.common.get_ejscreen_data import transform_and_load
-from mapper.models import Region, Indicator, IndicatorScore
+from mapper.common.ejscreen_indicators import INDICATORS
+from mapper.models import db, Region, Indicator, IndicatorScore
+from tests.data.indicator_scores import SCORES
 
 
-def test_transform_and_load(client):
+def test_run_etl(client):
 
-    # setup
-    file = Path.cwd() / "tests" / "data" / "source_geo.json"
-    with open(file) as f:
-        geo = json.load(f)
-    feature = geo["features"][0]
+    # setup - json
+    expected_scores = SCORES["Block 1"]
 
     # execute
-    transform_and_load(feature)
     region = Region.query.get(1)
     scores = region.indicator_scores
 
     # validate
     assert region is not None
     assert len(scores) == 18
-    assert 0
+    for score in scores:
+        indicator = score.indicator.source_name
+        assert expected_scores[indicator] == score.value

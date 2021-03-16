@@ -28,6 +28,7 @@ def client():
             with app.app_context():
                 db.create_all()
                 populate(db)
+                print("Populated DB")
                 yield client
 
     except Exception as error:

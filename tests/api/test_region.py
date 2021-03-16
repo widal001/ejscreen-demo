@@ -6,7 +6,7 @@ class TestRegionModel:
     def test_add_region(self, client):
         # setup
         data = {
-            "id": 1,
+            "id": 999,
             "fips_code": "0000001",
             "state": "MD",
         }
@@ -15,7 +15,7 @@ class TestRegionModel:
         region = Region(**data)
         db.session.add(region)
         db.session.commit()
-        region = Region.query.get(1)
+        region = Region.query.get(999)
 
         print(region.census_level)
 

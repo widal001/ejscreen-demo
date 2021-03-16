@@ -1,13 +1,10 @@
-from mapper.models import Indicator
+from pathlib import Path
 
-from mapper.common.ejscreen_columns import INDICATORS
+from mapper.common.get_ejscreen_data import run_etl
 
-indicators = {name: Indicator(**fields) for name, fields in INDICATORS.items()}
+ejscreen_file = Path.cwd() / "tests" / "data" / "source_geo.json"
 
 
 def populate(db):
 
-    for indicator in indicators.values():
-        db.session.add(indicator)
-
-    db.session.commit()
+    run_etl(ejscreen_file)
