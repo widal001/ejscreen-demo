@@ -2,6 +2,7 @@ import enum
 
 from marshmallow import Schema, EXCLUDE, fields
 from sqlalchemy.ext.hybrid import hybrid_property
+from geoalchemy2 import Geometry
 
 # from geoalchemy2 import Geometry
 
@@ -29,6 +30,7 @@ class Region(db.Model):
     # table columns
     id = db.Column(db.Integer, primary_key=True)
     fips_code = db.Column(db.String, nullable=False)
+    geometry = db.Column(Geometry("MULTIPOLYGON"))
     census_hierarchy = db.Column(db.Integer, default=10)
     state = db.Column(db.String)
 
