@@ -30,7 +30,7 @@ class Region(db.Model):
     # table columns
     id = db.Column(db.Integer, primary_key=True)
     fips_code = db.Column(db.String, nullable=False)
-    geometry = db.Column(Geometry("MULTIPOLYGON"))
+    geometry = db.Column(Geometry("MULTIPOLYGON", srid=4326), nullable=False)
     census_hierarchy = db.Column(db.Integer, default=10)
     state = db.Column(db.String)
 

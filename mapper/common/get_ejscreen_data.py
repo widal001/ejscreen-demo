@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from shapely.geometry import shape
+
 from mapper.models import db, Region, Indicator, IndicatorScore
 from mapper.common.ejscreen_indicators import INDICATORS
 
@@ -32,11 +34,13 @@ def load_feature(feature):
 
     # get properties and indicators
     props = feature["properties"]
+    geo = shape(feature["geometry"]).wkt
     fields = (Indicator.id, Indicator.source_name)
     indicators = db.session.query(Indicator).with_entities(*fields).all()
 
     # create region and scores
-    region = Region(fips_code=props["ID"], state=props["ST_ABBREV"])
+
+    region = Region(fips_code=props["ID"], geometry=geo, state=props["ST_ABBREV"])
     for id_, name in indicators:
         score = IndicatorScore(indicator_id=id_, value=props[name], year=2020)
         region.indicator_scores.append(score)
