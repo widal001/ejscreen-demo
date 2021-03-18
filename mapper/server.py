@@ -13,16 +13,16 @@ def create_app(test_config=None):
     else:
         app.config.from_object(Config)
 
-    # register_dashapps(app)
+    register_dashapps(app)
     register_blueprints(app)
     register_database(app)
 
     return app
 
 
-def register_dashapps(app):
-    from mapper.dashapp1.layout import layout
-    from mapper.dashapp1.callbacks import register_callbacks
+def register_dashapps(server):
+    from mapper.dashboard.callbacks import layout
+    from mapper.dashboard.callbacks import register_callbacks
 
     # Meta tags for viewport responsiveness
     meta_viewport = {
@@ -33,14 +33,14 @@ def register_dashapps(app):
     assets = get_root_path(__name__) + "/dashboard/assets/"
     dashapp = dash.Dash(
         __name__,
-        server=app,
-        url_base_pathname="/dashboard/",
+        server=server,
+        url_base_pathname="/mapper/",
         assets_folder=assets,
         meta_tags=[meta_viewport],
     )
 
-    with app.app_context():
-        dashapp.title = "Dashapp"
+    with server.app_context():
+        dashapp.title = "Mapper"
         dashapp.layout = layout
         register_callbacks(dashapp)
 
