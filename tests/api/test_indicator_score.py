@@ -1,7 +1,7 @@
 import pytest
 from sqlalchemy.exc import IntegrityError
 
-from mapper.models import db, IndicatorScore, Region
+from mapper.api.models import db, IndicatorScore, Region
 
 
 class TestIndicatorScoreModel:

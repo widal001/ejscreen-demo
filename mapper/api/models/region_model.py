@@ -6,7 +6,7 @@ from geoalchemy2 import Geometry
 
 # from geoalchemy2 import Geometry
 
-from mapper.models import db
+from mapper.api.models import db
 
 
 class CensusHierarchy(enum.IntEnum):

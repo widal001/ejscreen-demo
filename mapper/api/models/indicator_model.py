@@ -2,7 +2,7 @@ from marshmallow import Schema, EXCLUDE, fields
 
 # from sqlalchemy.ext.hybrid import hybrid_property
 
-from mapper.models import db
+from mapper.api.models import db
 
 
 class Indicator(db.Model):

@@ -5,7 +5,8 @@ from pathlib import Path
 import pytest
 from testing.postgresql import Postgresql
 
-from mapper.app import create_app
+from mapper import create_app
+from mapper.api.models import db
 from tests.populate_db import populate
 
 
@@ -20,7 +21,7 @@ def client_sqlite():
 
     try:
         # create the app and
-        app, db = create_app()
+        app = create_app()
         app.config["TESTING"] = True
         app.config["SQLALCHEMY_DATABASE_URI"] = uri
 
@@ -47,7 +48,7 @@ def client():
 
     # create a temporary database
     with Postgresql() as postgresql:
-        app, db = create_app()
+        app = create_app()
         app.config["TESTING"] = True
         app.config["SQLALCHEMY_DATABASE_URI"] = postgresql.url()
 

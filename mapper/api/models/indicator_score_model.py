@@ -1,6 +1,6 @@
 from marshmallow import Schema, EXCLUDE, fields
 
-from mapper.models import db
+from mapper.api.models import db
 
 
 class IndicatorScore(db.Model):
