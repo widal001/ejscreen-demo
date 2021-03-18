@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from mapper.models.indicator_model import Indicator, IndicatorSchema
+from mapper.models import Indicator, IndicatorSchema
 
 
 class Indicators(Resource):
