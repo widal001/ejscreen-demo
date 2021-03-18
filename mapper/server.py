@@ -1,6 +1,7 @@
 import dash
 from flask import Flask
 from flask.helpers import get_root_path
+from flask_bootstrap import Bootstrap
 
 from config import Config
 
@@ -16,6 +17,8 @@ def create_app(test_config=None):
     register_dashapps(app)
     register_blueprints(app)
     register_database(app)
+
+    Bootstrap(app)
 
     return app
 
