@@ -3,7 +3,7 @@ from pathlib import Path
 
 from shapely.geometry import shape
 
-from mapper.models import db, Region, Indicator, IndicatorScore
+from mapper.api.models import db, Region, Indicator, IndicatorScore
 from mapper.common.ejscreen_indicators import INDICATORS
 
 

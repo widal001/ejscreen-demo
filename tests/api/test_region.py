@@ -1,7 +1,7 @@
 import pytest
 
-from mapper.models import Region
-from mapper.models import db
+from mapper.api.models import Region
+from mapper.api.models import db
 
 
 class TestRegionResource:

@@ -4,7 +4,7 @@ from pathlib import Path
 from geoalchemy2.functions import ST_AsGeoJSON
 
 from mapper.common.ejscreen_indicators import INDICATORS
-from mapper.models import db, Region, Indicator, IndicatorScore
+from mapper.api.models import db, Region, Indicator, IndicatorScore
 from tests.data.indicator_scores import SCORES
 
 

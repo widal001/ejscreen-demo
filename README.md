@@ -15,6 +15,8 @@ Updated example of EJScreen's tool
 
 ## About this Project
 
+![Screen Shot of Home Page](mapper/static/homescreen.png)
+
 This tool provides a demonstration of an updated version of the EJScreen mapping tool, including an API to expose the EJScreen data in a machine readable format.
 
 Below is a brief description of the current EJScreen tool pulled from its [home page](https://www.epa.gov/ejscreen):
@@ -73,7 +75,7 @@ If you don't have Python version 3.6 or later installed on your computer, consid
 ## Usage
 
 1. After you've cloned and installed the repo, start your local test server `python run.py`
-1. Open a browser and go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) and you should see `Hello, World.`
+1. Open a browser and go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) and you should see the home page with links to the original tool and the updated demo.
 1. Additional usage details soon
 
 ## Contributing

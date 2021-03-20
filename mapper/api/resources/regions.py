@@ -3,7 +3,7 @@ import json
 from flask_restful import Resource
 from geoalchemy2.functions import ST_AsGeoJSON
 
-from mapper.models import db, Region
+from mapper.api.models import db, Region
 
 
 def format_row(col):
