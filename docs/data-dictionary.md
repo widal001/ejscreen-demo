@@ -6,7 +6,6 @@ This documents outlines the schema of the mapping tool's underlying datastore, o
 
 Stores the unique list of indicators that are used to calculate index scores as well as metadata about those indicators, such as their original datasource, source_name, and description.
 
-
 | Column      | Data Type | Example          | Notes                         |
 | :---------- | :-------- |:---------------  |:----------------------------- |
 | id          | integer   | 1                | Primary Key, Auto-incremented |
