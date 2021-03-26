@@ -1,3 +1,5 @@
+import os
+
 from sqlalchemy import inspect
 from testing.postgresql import Postgresql
 
@@ -15,21 +17,21 @@ def test_create_local_db():
     # setup - create app
     tables = ["indicator", "region", "indicator_score"]
 
-    with Postgresql() as postgresql:
-        app = create_app()
-        app.config["TESTING"] = True
-        app.config["SQLALCHEMY_DATABASE_URI"] = postgresql.url()
-        with app.app_context():
-            # setup - confirm db is empty
-            inspector = inspect(db.engine)
-            assert "indicator" not in inspector.get_table_names()
+    app = create_app()
+    app.config["TESTING"] = True
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("UNITTEST_DB")
+    with app.app_context():
+        # setup - confirm db is empty
+        db.drop_all()
+        inspector = inspect(db.engine)
+        assert "indicator" not in inspector.get_table_names()
 
-            # execution
-            create_local_db(app)
-            inspector = inspect(db.engine)
-            indicator = Indicator.query.get(1)
+        # execution
+        create_local_db(app)
+        inspector = inspect(db.engine)
+        indicator = Indicator.query.get(1)
 
-            # validation
-            for table in tables:
-                assert table in inspector.get_table_names()
-            assert indicator.source_name == "ACSTOTPOP"
+        # validation
+        for table in tables:
+            assert table in inspector.get_table_names()
+        assert indicator.source_name == "ACSTOTPOP"
