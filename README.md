@@ -73,9 +73,9 @@ If you don't have docker or docker-compose installed on your local machine, foll
    > Creating postgres     ... done
    > Creating app          ... done
    ```
-1. Wait 2-3 seconds after the apps are built, then run `docker-compose exec pytest` from the command line to execute the tests and ensure everything passes. Something similar to the following should be printed to the console:
+1. Wait 2-3 seconds after the apps are built, then run `docker-compose exec app pytest` from the command line to execute the tests and ensure everything passes. Something similar to the following should be printed to the console:
    ```
-   $ docker-compose exec pytest
+   $ docker-compose exec app pytest
    > =========================== test session starts ==========================
    > platform linux -- Python 3.7.10, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
    > rootdir: /app
@@ -93,14 +93,14 @@ If you don't have docker or docker-compose installed on your local machine, foll
 
 ### Advanced Installation
 
-1. Confirm that you have an python version 3.7 installed on your local machine
+1. Confirm that you have python version 3.7 installed on your local machine
    ```
    $ python --version
    > Python 3.7.7  # should be something that starts with 3.7.x
    ```
 1. Fork the repo following [these instructions](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
 1. Clone the forked repo on your local machine`git clone https://github.com/YOUR_USERNAME/ejscreen-demo.git`
-1. Run `docker-compose up -d` to build and run the docker image of the app
+1. Change directory into the project folder then run `python -m venv env` to create a virtual environment
 1. Activate your virtual environment `source env/bin/activate`
 1. Install necessary python packages`pip install -r requirements.txt`
 1. Install pre-commit to enable pre-commit hooks (This step ensures that your code is formatted according the Black standard and is compliant with PEP8.)
@@ -118,9 +118,9 @@ If you don't have docker or docker-compose installed on your local machine, foll
    > Creating postgres     ... done
    > Creating app          ... done
    ```
-1. Wait 2-3 seconds after the apps are built, then run `docker-compose exec pytest` from the command line to execute the tests and ensure everything passes. Something similar to the following should be printed to the console:
+1. Wait 2-3 seconds after the apps are built, then run `docker-compose exec app pytest` from the command line to execute the tests and ensure everything passes. Something similar to the following should be printed to the console:
    ```
-   $ docker-compose exec pytest
+   $ docker-compose exec app pytest
    > =========================== test session starts ==========================
    > platform linux -- Python 3.7.10, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
    > rootdir: /app
