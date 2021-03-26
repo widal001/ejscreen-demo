@@ -16,6 +16,8 @@ def create_local_app():
     app.config["TESTING"] = True
 
     with app.app_context():
+        print("DB URI")
+        print(app.config["SQLALCHEMY_DATABASE_URI"])
         inspector = inspect(db.engine)
         if "indicator" not in inspector.get_table_names():
             print("Database is empty, populating database")
@@ -26,4 +28,4 @@ def create_local_app():
 if __name__ == "__main__":
 
     app = create_local_app()
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")

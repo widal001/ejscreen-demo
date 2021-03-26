@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  postgres:
+    container_name: postgres
+    restart: always
+    image: postgis/postgis
+    environment:
+      - POSTGRES_USER=testusr
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=testdb
+    volumes:
+      - flask-app-db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  app:
+    container_name: app
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URL=postgresql://testusr:password@postgres:5432/testdb
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    entrypoint: ["python3", "run.py"]
+
+volumes:
+  flask-app-db:
+    name: flask-app-db
