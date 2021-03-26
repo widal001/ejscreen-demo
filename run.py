@@ -1,6 +1,7 @@
+import time
 from pathlib import Path
 
-from sqlalchemy import inspect
+from sqlalchemy import inspect, exc
 
 from setup import create_local_db
 from mapper import create_app
@@ -16,13 +17,18 @@ def create_local_app():
     app.config["TESTING"] = True
 
     with app.app_context():
-        print("DB URI")
-        print(app.config["SQLALCHEMY_DATABASE_URI"])
-        inspector = inspect(db.engine)
-        if "indicator" not in inspector.get_table_names():
-            print("Database is empty, populating database")
-            create_local_db(app)
-        return app
+        for _ in range(25):
+            try:
+                inspector = inspect(db.engine)
+                if "indicator" not in inspector.get_table_names():
+                    print("Database is empty, populating database")
+                    create_local_db(app)
+                return app
+            except exc.OperationalError as e:
+                print("Waiting for database...")
+                time.sleep(1)
+                error = e
+        raise error
 
 
 if __name__ == "__main__":
