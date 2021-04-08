@@ -9,8 +9,11 @@ Updated example of EJScreen's tool
   - [Made With](#made-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
+  - [Quick Installation](#quick-installation)
+  - [Advanced Installation](#advanced-installation)
 - [Usage](#usage)
+  - [The App](#the-app)
+  - [The API](#the-api)
 - [Contributing](#contributing)
 
 ## About this Project
@@ -41,50 +44,63 @@ To use the EPA's current version of the EJScreen tool and learn more about the u
 
 ### Prerequisites
 
-- Python version 3.6 to 3.8
-- PostgreSQL installed on your computer with a localhost database server created
+- Docker installed on your computer
+- docker-compose installed on your computer
 
 In order to check which version of python you have installed, run the following in your command line (for Mac/Linux)
 
 > **NOTE:** in all of the code blocks below, lines preceded with `$` indicate commands you should enter in your command line (excluding the `$` itself), while lines preceded with `>` indicate the expected output from the previous command.
 
 ```
-$ python --version
-> Python 3.7.7  # should be something between 3.6.x and 3.8.x
+$ docker-compose -v && docker -v
+> docker-compose version 1.28.5, build c4eb3a1f
+> Docker version 20.10.5, build 55c4c88
 ```
 
-If you don't have Python version 3.6 or later installed on your computer, consider using [pyenv](https://github.com/pyenv/pyenv) to install and manage multiple versions of Python concurrently.
+If you don't have docker or docker-compose installed on your local machine, follow [these instructions to get docker](https://docs.docker.com/get-docker/)
 
-In order to check that you have PostgreSQL installed and can connect to the localhost database server, run the following in your command line:
+### Quick Installation
 
-```
-$ psql -h localhost  # logs you into the localhost db
-> YOUR_USERNAME=#
-$ \q  # logs you out of the localhost db
-```
-
-If you get an error when trying to connect to the localhost database server, consider using some of these resources to troubleshoot:
-
-- [Getting Started with PostgreSQL on Mac](https://medium.com/@viviennediegoencarnacion/getting-started-with-postgresql-on-mac-e6a5f48ee399)
-- [StackOverflow - psql: FATAL: database “user” does not exist](https://stackoverflow.com/questions/17633422/psql-fatal-database-user-does-not-exist)
-
-### Installation
-
-1. Confirm that you have an acceptable version of python installed
-   ```
-   $ python --version
-   > Python 3.7.7  # should be something between 3.6.x and 3.8.x
-   ```
-1. Confirm that you have PostgreSQL installed on your machine and that you can connect to the localhost database server
-   ```
-   $ psql -h localhost  # logs you into the localhost db server
-   > YOUR_USERNAME=#
-   $ \q  # logs you out of the localhost db server
-   ```
-1. If you encounter errors with either of the first two steps, return to prerequisites before proceeding to step 4
 1. Fork the repo following [these instructions](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
 1. Clone the forked repo on your local machine`git clone https://github.com/YOUR_USERNAME/ejscreen-demo.git`
-1. Create a new virtual environment in your project directory `python -m venv env`
+1. Run `docker-compose up -d` from the command line to build and run docker containers for the app. Something similar to the following should be printed to the console:
+   ```
+   $ docker-compose up -d          
+   > Creating network "ejscreen-demo_default" with the default driver
+   > Creating volume "flask-test-db" with default driver
+   > Creating volume "flask-app-db" with default driver
+   > Creating postgrestest ... done
+   > Creating postgres     ... done
+   > Creating app          ... done
+   ```
+1. Wait 2-3 seconds after the apps are built, then run `docker-compose exec app pytest` from the command line to execute the tests and ensure everything passes. Something similar to the following should be printed to the console:
+   ```
+   $ docker-compose exec app pytest
+   > =========================== test session starts ==========================
+   > platform linux -- Python 3.7.10, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
+   > rootdir: /app
+   > plugins: dash-1.19.0
+   > collected 5 items
+   >
+   > tests/api/test_indicator.py .                                       [ 20%]
+   > tests/api/test_indicator_score.py .                                 [ 40%]
+   > tests/api/test_region.py .                                          [ 60%]
+   > tests/common/test_get_ejscreen_data.py .                            [ 80%]
+   > tests/common/test_setup.py .                                        [100%]
+   >
+   > ============================ 5 passed in 4.32s ============================
+   ```
+
+### Advanced Installation
+
+1. Confirm that you have python version 3.7 installed on your local machine
+   ```
+   $ python --version
+   > Python 3.7.7  # should be something that starts with 3.7.x
+   ```
+1. Fork the repo following [these instructions](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
+1. Clone the forked repo on your local machine`git clone https://github.com/YOUR_USERNAME/ejscreen-demo.git`
+1. Change directory into the project folder then run `python -m venv env` to create a virtual environment
 1. Activate your virtual environment `source env/bin/activate`
 1. Install necessary python packages`pip install -r requirements.txt`
 1. Install pre-commit to enable pre-commit hooks (This step ensures that your code is formatted according the Black standard and is compliant with PEP8.)
@@ -92,24 +108,48 @@ If you get an error when trying to connect to the localhost database server, con
    $ pre-commit install
    > pre-commit installed at .git/hooks/pre-commit
    ```
-1. Run the tests and make sure everything passes
+1. Run `docker-compose up -d` from the command line to build and run docker containers for the app. Something similar to the following should be printed to the console:
    ```
-   $ pytest
-   > =============== XX passed in XXs ===============
+   $ docker-compose up -d          
+   > Creating network "ejscreen-demo_default" with the default driver
+   > Creating volume "flask-test-db" with default driver
+   > Creating volume "flask-app-db" with default driver
+   > Creating postgrestest ... done
+   > Creating postgres     ... done
+   > Creating app          ... done
+   ```
+1. Wait 2-3 seconds after the apps are built, then run `docker-compose exec app pytest` from the command line to execute the tests and ensure everything passes. Something similar to the following should be printed to the console:
+   ```
+   $ docker-compose exec app pytest
+   > =========================== test session starts ==========================
+   > platform linux -- Python 3.7.10, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
+   > rootdir: /app
+   > plugins: dash-1.19.0
+   > collected 5 items
+   >
+   > tests/api/test_indicator.py .                                       [ 20%]
+   > tests/api/test_indicator_score.py .                                 [ 40%]
+   > tests/api/test_region.py .                                          [ 60%]
+   > tests/common/test_get_ejscreen_data.py .                            [ 80%]
+   > tests/common/test_setup.py .                                        [100%]
+   >
+   > ============================ 5 passed in 4.32s ============================
    ```
 
 ## Usage
 
 ### The App
 
-1. After you've cloned and installed the repo, start your local test server `python run.py`
+1. After you've cloned and installed the repo, run `docker-compose up -d` to start the app locally
 1. Open a browser and go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) and you should see the home page with links to the original tool and the updated demo.
+1. When you're done using or testing the API tear down the containers by running `docker-compose down --volumes`
 
 ### The API
 
-1. After you've cloned and installed the repo, start your local test server `python run.py`
+1. After you've cloned and installed the repo, run `docker-compose up -d` to start the app locally
 1. Open a browser and go to [http://127.0.0.1:5000/api/indicators](http://127.0.0.1:5000/api/indicators) and you should the JSON of all of the indicators in the database.
 1. Go to [http://127.0.0.1:5000/api/regions](http://127.0.0.1:5000/api/regions) and you should get the JSON of the first 10 regions from the EJSCREEN source data
+1. When you're done using or testing the app tear down the containers by running `docker-compose down --volumes`
 
 ## Contributing
 
